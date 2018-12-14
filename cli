@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/bootstrap.php';
+
+use Symfony\Component\Console\Application;
+use Centurion\Space\Cli\Build;
+use Centurion\Space\Cli\Delete;
+use Centurion\Space\Cli\Key;
+use Centurion\Space\Cli\Collection;
+
+$application = new Application();
+
+$application->add(new Build());
+$application->add(new Delete());
+$application->add(new Key());
+$application->add(new Collection());
+
+$space = space()->Collection('root/core/cli');
+
+if($space!=NULL && count($space)>0)
+{
+    foreach($space as $key => $value)
+        {
+            $application->add(new $value());
+        }
+}
+
+$application->run();

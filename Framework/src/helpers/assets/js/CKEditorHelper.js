@@ -1,0 +1,1 @@
+CKEDITOR.replaceAll( 'centurion-ckeditor-classic-helper' );

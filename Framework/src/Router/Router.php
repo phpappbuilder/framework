@@ -15,11 +15,14 @@ class Router
     public $name_prefix = '';//Префикс имени роута
     public $route_prefix = '';//Префикс всех роутов данной коллекции
 
+    public $controllerNamespace = '\\App\\Controller\\';//namespace для указания контроллера
 
 
-    public function __construct(string $router_prefix = NULL){
+
+    public function __construct(string $url_prefix = NULL, string $name_prefix = NULL){
         $this->router_collection = new RC();
-        if ($router_prefix != NULL) { $this->name_prefix = $router_prefix;}
+        if ($url_prefix != NULL) { $this->route_prefix = $url_prefix;}
+        if ($name_prefix != NULL) { $this->name_prefix = $name_prefix;}
     }
 
     protected function controller(string $string){
@@ -53,7 +56,9 @@ class Router
 
             if (count($list)>0){
                 foreach($list as $val) { // считываем переданный массив
-                    $result[] = $val;
+                    if(!empty($val)){
+                        $result[] = $val;
+                    }
                 }
             }
             return array_unique($result);
@@ -84,7 +89,7 @@ class Router
         $controller = $this->controller($controller);
 
         $object = new RouteObject($route, [
-            '_controller'=>$controller['_controller'],
+            '_controller'=>$this->controllerNamespace.$controller['_controller'],
             '_action'=>$controller['_action'],
             '_middleware'=>$this->middleware($this->stringToArr($params['_middleware']))
         ]);
@@ -133,6 +138,7 @@ class Router
 
     public function get(string $route, string $controller, array $params = []){
         $params['method'] = 'GET';
+        if(!isset($params['_middleware'])){$params['_middleware']='';}
         $this->addRoute($route, $controller, $params);
         return $this;
     }
@@ -198,5 +204,10 @@ class Router
             $this->router_collection->addCollection($object);
         }
         return $this->router_collection;
+    }
+
+    public function controllerNamespace(string $namespace){
+        $this->controllerNamespace = $namespace;
+        return $this;
     }
 }

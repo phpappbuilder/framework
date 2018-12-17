@@ -1,5 +1,5 @@
 <?php
-namespace Centurion\Router;
+namespace Centurion;
 
 use Symfony\Component\Routing;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -61,7 +61,8 @@ class App
                 unset($middleware);
             }
 
-            $controller = '\\App\\Controller\\'.$info['_controller'];
+
+            $controller = $info['_controller'];
             $action = $info['_action'];
             bdump($info);
 

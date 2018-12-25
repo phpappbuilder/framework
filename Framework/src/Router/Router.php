@@ -18,6 +18,25 @@ class Router
     public $controllerNamespace = '\\App\\Controller\\';//namespace для указания контроллера
 
 
+    /**
+     * @param $name_prefix
+     * @return $this
+     */
+    public function namePrefix($name_prefix)
+    {
+        $this->name_prefix = $name_prefix;
+        return $this;
+    }
+
+    /**
+     * @param $route_prefix
+     * @return $this
+     */
+    public function routePrefix($route_prefix)
+    {
+        $this->route_prefix = $route_prefix;
+        return $this;
+    }
 
     public function __construct(string $url_prefix = NULL, string $name_prefix = NULL){
         $this->router_collection = new RC();
@@ -131,7 +150,7 @@ class Router
             $middleware = $this->middleware([]);
         }
         $object->middleware($middleware);
-        $object->route_prefix = $prefix;
+        $object->routePrefix($prefix);
 
         $this->routerGroup[] = $object;
     }
@@ -198,6 +217,8 @@ class Router
         foreach($this->router as $value){
             $this->addCompile($value['route'], $value['controller'], $value['params']);
         }
+        $this->router_collection->addPrefix($this->route_prefix);
+        $this->router_collection->addNamePrefix($this->name_prefix);
 
         foreach($this->routerGroup as $value){
             $object = $value -> run();

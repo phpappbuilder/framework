@@ -48,8 +48,10 @@ class App
 
 
         $response = new Response();
+
         try {
             $info = $matcher->match($request->getPathInfo());
+            bdump($info);
             foreach ($info['_middleware'] as $value){
                 $mdl = $this->mdl($value);
                 $name = $mdl['middleware'];

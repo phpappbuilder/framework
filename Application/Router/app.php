@@ -1,10 +1,10 @@
 <?php
 use Centurion\Router\Router;
-return (new Router(''))
+return (new Router())
 
     ->get('/', 'Main@main', ['name'=>'index'])
 
-    ->get('/admin', 'Main@main', ['name'=>'admin'])
+    ->get('/i/{user}', 'Main@main', ['name'=>'user'])
 
     ->group('/user', (new Router())
 

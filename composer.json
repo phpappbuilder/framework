@@ -15,6 +15,7 @@
         ],
         "psr-4":
         {
+            "Lib\\": "Lib/",
             "App\\": "Application/",
             "Modules\\": "Modules/",
             "Centurion\\": "Framework/src/"

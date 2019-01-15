@@ -4,7 +4,7 @@ return (new Router())
 
     ->get('/', 'Main@main', ['name'=>'index'])
 
-    ->get('/i/{user}', 'Main@main', ['name'=>'user'])
+    ->get('/domain', 'Main@main', ['name'=>'user'])
 
     ->group('/user', (new Router())
 

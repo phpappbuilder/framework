@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: server
- * Date: 13.01.19
- * Time: 23:29
- */
-
 namespace Lib\AbstractObject\Storage\Db;
 
+use Illuminate\Database\Eloquent\Model as eModel;
 
-class Model
+class Model extends eModel
 {
-
+    public $table = 'object';
+    public $timestamps = false;
 }

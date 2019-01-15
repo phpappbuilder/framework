@@ -11,7 +11,8 @@
     "autoload":
     {
         "files": [
-        "Framework/src/helpers.php"
+            "Framework/src/helpers.php",
+            "Framework/src/Db/DBloader.php"
         ],
         "psr-4":
         {
@@ -27,7 +28,9 @@
         "oomphinc/composer-installers-extender": "^1.1",
         "phpappbuilder/space": "^1.0",
         "symfony/routing": "^4.1",
-        "symfony/http-foundation": "^4.1"
+        "symfony/http-foundation": "^4.1",
+        "illuminate/database": "^5.7",
+        "phois/whois": "dev-master"
     },
     "extra": {
         "installer-types": ["centurion-app"],

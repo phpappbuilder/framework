@@ -1,7 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: server
- * Date: 13.01.19
- * Time: 22:43
- */
+
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$capsule = new Capsule;
+
+foreach (config('app.db') as $key => $value){
+    $capsule->addConnection($value, $key);
+}
+
+$capsule->setAsGlobal();
